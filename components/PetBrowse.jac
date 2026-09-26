@@ -76,6 +76,7 @@ def:pub PetBrowse() -> JsxElement {
                         <Button variant={"secondary" if species == "all" else "outline"} className={"border-primary-foreground/30 " + ("" if species == "all" else "bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground")} onClick={lambda { species = "all"; }}>All pets</Button>
                         <Button variant={"secondary" if species == "dog" else "outline"} className={"border-primary-foreground/30 " + ("" if species == "dog" else "bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground")} onClick={lambda { species = "dog"; }}>Dogs</Button>
                         <Button variant={"secondary" if species == "cat" else "outline"} className={"border-primary-foreground/30 " + ("" if species == "cat" else "bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground")} onClick={lambda { species = "cat"; }}>Cats</Button>
+                        <Button variant={"secondary" if species == "other" else "outline"} className={"border-primary-foreground/30 " + ("" if species == "other" else "bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground")} onClick={lambda { species = "other"; }}>Other</Button>
                     </div>
                 </div>
             </section>
@@ -103,7 +104,7 @@ def:pub PetBrowse() -> JsxElement {
                         <EmptyHeader>
                             <EmptyMedia variant="icon"><HugeiconsIcon icon={SparklesIcon} strokeWidth={2} /></EmptyMedia>
                             <EmptyTitle>No pets in this group just yet</EmptyTitle>
-                            <EmptyDescription>Choose another group to meet more HSHV companions.</EmptyDescription>
+                            <EmptyDescription>{"The current mock list contains dogs and cats only. See HSHV adoption information for other animals." if species == "other" else "Choose another group to meet more HSHV companions."}</EmptyDescription>
                         </EmptyHeader>
                     </Empty>
                     skip;
