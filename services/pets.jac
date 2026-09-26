@@ -30,6 +30,7 @@ def:pub list_pets() -> list[Pet] {
         root ++> Pet(name="Ollie", species="dog", age="8 months", sex="Male", location="Ann Arbor", description="Curious, playful, and ready to learn all about life with his person.", image_url="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=900&q=85");
         root ++> Pet(name="Juniper", species="cat", age="1 year", sex="Female", location="Ann Arbor", description="A gentle window-watcher who warms up with a little patience and a few treats.", image_url="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=900&q=85");
         root ++> Pet(name="Biscuit", species="cat", age="3 years", sex="Male", location="Ann Arbor", description="A friendly lap companion with a talent for finding the coziest sunny spot.", image_url="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=900&q=85");
+        root ++> Pet(name="Pip", species="other", age="1 year", sex="Female", location="Ann Arbor", description="A curious little hamster who enjoys gentle handling, fresh bedding, and exploring enrichment toys. Mock profile; small-animal details are illustrative.", image_url="https://images.unsplash.com/photo-1425082661705-1834bfd09dca?auto=format&fit=crop&w=900&q=85");
         pets = [root -->][?:Pet];
     }
     return pets;
@@ -42,10 +43,9 @@ def:pub toggle_favorite(pet_id: str) -> Pet | None {
     return None;
 }
 
-def:pub rank_pet_matches(species_preference: str, has_dogs: bool, has_cats: bool, has_children: bool, activity: str, first_pet: bool) -> list[MatchCard] {
+def:pub rank_pet_matches(species_preference: str, has_dogs: bool, has_cats: bool, has_other_pets: bool, has_children: bool, activity: str, first_pet: bool) -> list[MatchCard] {
     pets = list_pets();
     results: list[MatchCard] = [];
-    if species_preference == "other" { return results; }
     for pet in pets {
         if species_preference != "" and species_preference != "either" and pet.species != species_preference { continue; }
         score = 60;
@@ -60,7 +60,7 @@ def:pub rank_pet_matches(species_preference: str, has_dogs: bool, has_cats: bool
         }
         if first_pet { reasons = reasons + ["HSHV staff can help first-time adopters plan a transition."]; }
         elif first_pet == False { reasons = reasons + ["Your previous pet experience may help with the transition."]; }
-        if has_dogs or has_cats or has_children { flags = flags + ["Household compatibility is not provided. Ask about resident pets and children before arranging a visit."]; }
+        if has_dogs or has_cats or has_other_pets or has_children { flags = flags + ["Household compatibility is not provided. Ask about resident pets and children before arranging a visit."]; }
         else { flags = flags + ["Ask staff about temperament, training, and time-at-home needs."]; }
         results = results + [MatchCard(pet_id=jid(pet), name=pet.name, species=pet.species, age=pet.age, sex=pet.sex, location=pet.location, description=pet.description, image_url=pet.image_url, score=score, reasons=reasons, flags=flags)];
     }

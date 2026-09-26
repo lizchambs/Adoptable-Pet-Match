@@ -70,13 +70,13 @@ def:pub PetBrowse() -> JsxElement {
                     <div className="flex max-w-2xl flex-col gap-4">
                         <Badge variant="secondary" className="w-fit border-primary-foreground/20 bg-primary-foreground/15 text-primary-foreground">Your next chapter starts here</Badge>
                         <h1 className="text-balance text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl">A good match changes everything.</h1>
-                        <p className="max-w-xl text-base leading-relaxed text-primary-foreground/80 sm:text-lg">Meet adoptable dogs and cats at HSHV. Find the personality that feels like home.</p>
+                        <p className="max-w-xl text-base leading-relaxed text-primary-foreground/80 sm:text-lg">Explore mock dog, cat, and small-animal profiles. Find the personality that feels like home.</p>
                     </div>
                     <div className="flex flex-wrap gap-2">
                         <Button variant={"secondary" if species == "all" else "outline"} className={"border-primary-foreground/30 " + ("" if species == "all" else "bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground")} onClick={lambda { species = "all"; }}>All pets</Button>
                         <Button variant={"secondary" if species == "dog" else "outline"} className={"border-primary-foreground/30 " + ("" if species == "dog" else "bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground")} onClick={lambda { species = "dog"; }}>Dogs</Button>
                         <Button variant={"secondary" if species == "cat" else "outline"} className={"border-primary-foreground/30 " + ("" if species == "cat" else "bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground")} onClick={lambda { species = "cat"; }}>Cats</Button>
-                        <Button variant={"secondary" if species == "other" else "outline"} className={"border-primary-foreground/30 " + ("" if species == "other" else "bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground")} onClick={lambda { species = "other"; }}>Other</Button>
+                        <Button variant={"secondary" if species == "other" else "outline"} className={"border-primary-foreground/30 " + ("" if species == "other" else "bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground")} onClick={lambda { species = "other"; }}>Other pets</Button>
                     </div>
                 </div>
             </section>
@@ -104,7 +104,7 @@ def:pub PetBrowse() -> JsxElement {
                         <EmptyHeader>
                             <EmptyMedia variant="icon"><HugeiconsIcon icon={SparklesIcon} strokeWidth={2} /></EmptyMedia>
                             <EmptyTitle>No pets in this group just yet</EmptyTitle>
-                            <EmptyDescription>{"The current mock list contains dogs and cats only. See HSHV adoption information for other animals." if species == "other" else "Choose another group to meet more HSHV companions."}</EmptyDescription>
+                            <EmptyDescription>Choose another group to explore more mock pet profiles.</EmptyDescription>
                         </EmptyHeader>
                     </Empty>
                     skip;
