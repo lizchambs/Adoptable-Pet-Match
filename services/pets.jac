@@ -47,7 +47,7 @@ def:pub rank_pet_matches(species_preference: str, has_dogs: bool, has_cats: bool
     results: list[MatchCard] = [];
     if species_preference == "other" { return results; }
     for pet in pets {
-        if species_preference != "either" and pet.species != species_preference { continue; }
+        if species_preference != "" and species_preference != "either" and pet.species != species_preference { continue; }
         score = 60;
         reasons: list[str] = [];
         flags: list[str] = ["This is mock profile data; compatibility and current availability are unknown."];
@@ -59,7 +59,7 @@ def:pub rank_pet_matches(species_preference: str, has_dogs: bool, has_cats: bool
             reasons = reasons + ["Your routine may suit this companion; ask staff about their individual needs."];
         }
         if first_pet { reasons = reasons + ["HSHV staff can help first-time adopters plan a transition."]; }
-        else { reasons = reasons + ["Your previous pet experience may help with the transition."]; }
+        elif first_pet == False { reasons = reasons + ["Your previous pet experience may help with the transition."]; }
         if has_dogs or has_cats or has_children { flags = flags + ["Household compatibility is not provided. Ask about resident pets and children before arranging a visit."]; }
         else { flags = flags + ["Ask staff about temperament, training, and time-at-home needs."]; }
         results = results + [MatchCard(pet_id=jid(pet), name=pet.name, species=pet.species, age=pet.age, sex=pet.sex, location=pet.location, description=pet.description, image_url=pet.image_url, score=score, reasons=reasons, flags=flags)];
