@@ -37,10 +37,7 @@ def:pub list_pets() -> list[Pet] {
 
 def:pub toggle_favorite(pet_id: str) -> Pet | None {
     for pet in [root -->][?:Pet] {
-        if jid(pet) == pet_id {
-            pet.favorite = not pet.favorite;
-            return pet;
-        }
+        if jid(pet) == pet_id { pet.favorite = not pet.favorite; return pet; }
     }
     return None;
 }
@@ -50,29 +47,20 @@ def:pub rank_pet_matches(species_preference: str, has_dogs: bool, has_cats: bool
     results: list[MatchCard] = [];
     for pet in pets {
         if species_preference != "either" and pet.species != species_preference { continue; }
+        score = 60;
         reasons: list[str] = [];
-        flags: list[str] = ["Compatibility details are not available in this sample listing. Confirm household fit with HSHV staff."];
-        score = 58;
-        if pet.species == "dog" and activity == "active" {
-            score += 12;
-            reasons = reasons + ["A dog may suit your active routine."];
-        } elif pet.species == "cat" and activity == "calm" {
-            score += 12;
-            reasons = reasons + ["A cat may suit a calmer home routine."];
+        flags: list[str] = ["This is mock profile data; compatibility and current availability are unknown."];
+        reasons = reasons + ["Species is included in your selected range."];
+        if (pet.species == "dog" and activity == "active") or (pet.species == "cat" and activity == "calm") {
+            score += 10;
+            reasons = reasons + ["The species preference is consistent with the routine you described."];
         } else {
-            reasons = reasons + ["Species matches your selection."];
+            reasons = reasons + ["Your routine may suit this companion; ask staff about their individual needs."];
         }
-        if first_pet {
-            reasons = reasons + ["You can ask HSHV staff about support for first-time adopters."];
-            flags = flags + ["Experience and training needs are not listed."];
-        } else {
-            reasons = reasons + ["Your pet experience may open more options."];
-        }
-        if has_dogs or has_cats or has_children {
-            flags = flags + ["Household compatibility is unknown; ask staff before arranging a visit."];
-        } else {
-            reasons = reasons + ["No existing pets or children were reported in your answers."];
-        }
+        if first_pet { reasons = reasons + ["HSHV staff can help first-time adopters plan a transition."]; }
+        else { reasons = reasons + ["Your previous pet experience may help with the transition."]; }
+        if has_dogs or has_cats or has_children { flags = flags + ["Household compatibility is not provided. Ask about resident pets and children before arranging a visit."]; }
+        else { flags = flags + ["Ask staff about temperament, training, and time-at-home needs."]; }
         results = results + [MatchCard(pet_id=jid(pet), name=pet.name, species=pet.species, age=pet.age, sex=pet.sex, location=pet.location, description=pet.description, image_url=pet.image_url, score=score, reasons=reasons, flags=flags)];
     }
     return results;

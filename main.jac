@@ -1,4 +1,5 @@
 import from services.pets { MatchCard, rank_pet_matches }
+import from services.pets { MatchCard, rank_pet_matches }
 import from .components.PetBrowse { PetBrowse }
 import from .components.PetMatchHome { PetMatchHome }
 import from .components.PetQuestionnaire { PetQuestionnaire }
