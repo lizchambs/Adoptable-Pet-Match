@@ -20,6 +20,7 @@ def:pub PetQuestionnaire() -> JsxElement {
     has activity: str = "moderate";
     has experience: str = "some";
     has hours: str = "4-8";
+    has budget: str = "51-100";
     has submitting: bool = False;
     has problem: str = "";
     navigate = useNavigate();
@@ -39,12 +40,13 @@ def:pub PetQuestionnaire() -> JsxElement {
                 activity = profile["activity"];
                 experience = profile["experience"];
                 hours = profile["hours"];
+                budget = profile["budget"];
             } except Exception { problem = "Saved answers could not be restored. You can continue with this profile."; }
         }
     }
 
     def save_profile {
-        localStorage.setItem("hshv-profile", JSON.stringify({"species": species, "home": home, "tenure": tenure, "yard": yard, "dogs": dogs, "cats": cats, "kids": kids, "activity": activity, "experience": experience, "hours": hours}));
+        localStorage.setItem("hshv-profile", JSON.stringify({"species": species, "home": home, "tenure": tenure, "yard": yard, "dogs": dogs, "cats": cats, "kids": kids, "activity": activity, "experience": experience, "hours": hours, "budget": budget}));
     }
     async def handle_next {
         save_profile();
@@ -74,6 +76,7 @@ def:pub PetQuestionnaire() -> JsxElement {
     def select_activity(value: str) { activity = value; save_profile(); }
     def select_experience(value: str) { experience = value; save_profile(); }
     def select_hours(value: str) { hours = value; save_profile(); }
+    def select_budget(value: str) { budget = value; save_profile(); }
 
     progress_value = (step + 1) * 33;
     step_title = "Who are you hoping to meet?" if step == 0 else "Tell us about your home" if step == 1 else "What does your routine look like?";
@@ -107,6 +110,7 @@ def:pub PetQuestionnaire() -> JsxElement {
                         <fieldset className="flex flex-col gap-3"><legend className="text-sm font-medium">How active is a typical day?</legend><RadioGroup value={activity} onValueChange={select_activity} className="flex flex-wrap gap-2"><Label className="flex items-center gap-2 rounded-lg border bg-background px-3 py-2"><RadioGroupItem value="calm" />Mostly calm</Label><Label className="flex items-center gap-2 rounded-lg border bg-background px-3 py-2"><RadioGroupItem value="moderate" />A mix of both</Label><Label className="flex items-center gap-2 rounded-lg border bg-background px-3 py-2"><RadioGroupItem value="active" />Very active</Label></RadioGroup></fieldset>
                         <fieldset className="flex flex-col gap-3"><legend className="text-sm font-medium">How much pet experience do you have?</legend><RadioGroup value={experience} onValueChange={select_experience} className="flex flex-wrap gap-2"><Label className="flex items-center gap-2 rounded-lg border bg-background px-3 py-2"><RadioGroupItem value="first" />This is my first pet</Label><Label className="flex items-center gap-2 rounded-lg border bg-background px-3 py-2"><RadioGroupItem value="some" />I have had pets</Label></RadioGroup></fieldset>
                         <fieldset className="flex flex-col gap-3"><legend className="text-sm font-medium">How long might a pet be home alone?</legend><RadioGroup value={hours} onValueChange={select_hours} className="flex flex-wrap gap-2"><Label className="flex items-center gap-2 rounded-lg border bg-background px-3 py-2"><RadioGroupItem value="0-4" />Under 4 hours</Label><Label className="flex items-center gap-2 rounded-lg border bg-background px-3 py-2"><RadioGroupItem value="4-8" />4 to 8 hours</Label><Label className="flex items-center gap-2 rounded-lg border bg-background px-3 py-2"><RadioGroupItem value="8+" />Over 8 hours</Label></RadioGroup></fieldset>
+                        <fieldset className="flex flex-col gap-3 sm:col-span-2"><legend className="text-sm font-medium">How much are you willing to spend per month?</legend><p className="text-xs text-muted-foreground">For planning purposes only; actual pet-care costs vary.</p><RadioGroup value={budget} onValueChange={select_budget} className="flex flex-wrap gap-2"><Label className="flex items-center gap-2 rounded-lg border bg-background px-3 py-2"><RadioGroupItem value="0-50" />$0–$50</Label><Label className="flex items-center gap-2 rounded-lg border bg-background px-3 py-2"><RadioGroupItem value="51-100" />$51–$100</Label><Label className="flex items-center gap-2 rounded-lg border bg-background px-3 py-2"><RadioGroupItem value="100+" />$100+</Label></RadioGroup></fieldset>
                     </div>
                 }}
                 <div className="flex flex-wrap items-center justify-between gap-3 border-t pt-5"><Button variant="outline" onClick={handle_back} className="gap-2"><HugeiconsIcon icon={ArrowLeft01Icon} strokeWidth={2} className="size-4" />{"Back to home" if step == 0 else "Previous"}</Button><div className="flex gap-2"><Button variant="ghost" onClick={lambda { save_profile(); navigate.call(None, "/matches"); }}>Skip for now</Button><Button onClick={handle_next} disabled={submitting} className="gap-2">{"Continue" if step < 2 else "See my matches"}<HugeiconsIcon icon={ArrowRight01Icon} strokeWidth={2} className="size-4" /></Button></div></div>
