@@ -32,11 +32,6 @@ def:pub PetMatchHome() -> JsxElement {
                     <CardContent className="flex items-center gap-3 px-5 pb-5 pt-2"><span className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary"><HugeiconsIcon icon={HeartCheckIcon} strokeWidth={2} className="size-5" /></span><div><p className="font-semibold">A match is more than a photo</p><p className="text-sm text-muted-foreground">Your home, experience, and routine matter.</p></div></CardContent>
                 </Card>
             </section>
-            <section className="grid gap-4 md:grid-cols-3">
-                <Card className="shadow-sm"><CardContent className="flex flex-col gap-3 p-5"><span className="text-sm font-semibold text-primary">01 · Tell us about home</span><h2 className="text-lg font-semibold">The people and pets</h2><p className="text-sm leading-relaxed text-muted-foreground">Share who lives with you and what kind of companion you hope to welcome.</p></CardContent></Card>
-                <Card className="shadow-sm"><CardContent className="flex flex-col gap-3 p-5"><span className="text-sm font-semibold text-primary">02 · Share your routine</span><h2 className="text-lg font-semibold">Your everyday life</h2><p className="text-sm leading-relaxed text-muted-foreground">A few answers about activity and experience help shape your shortlist.</p></CardContent></Card>
-                <Card className="shadow-sm"><CardContent className="flex flex-col gap-3 p-5"><span className="text-sm font-semibold text-primary">03 · Explore thoughtfully</span><h2 className="text-lg font-semibold">Reasons, not verdicts</h2><p className="text-sm leading-relaxed text-muted-foreground">See what may fit and what to confirm with HSHV adoption staff.</p></CardContent></Card>
-            </section>
             <p className="rounded-xl border bg-card p-4 text-sm leading-relaxed text-muted-foreground">Prototype notice: these sample profiles are not verified current HSHV listings. Availability and compatibility must be confirmed directly with the Humane Society of Huron Valley.</p>
         </main>
     </div>;
