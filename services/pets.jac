@@ -45,6 +45,7 @@ def:pub toggle_favorite(pet_id: str) -> Pet | None {
 def:pub rank_pet_matches(species_preference: str, has_dogs: bool, has_cats: bool, has_children: bool, activity: str, first_pet: bool) -> list[MatchCard] {
     pets = list_pets();
     results: list[MatchCard] = [];
+    if species_preference == "other" { return results; }
     for pet in pets {
         if species_preference != "either" and pet.species != species_preference { continue; }
         score = 60;

@@ -80,7 +80,7 @@ def:pub PetQuestionnaire() -> JsxElement {
     step_description = "Choose a species or stay open to either." if step == 0 else "These details help identify questions to confirm with staff." if step == 1 else "There are no wrong answers. Skip anything you are unsure about.";
 
     return <div className="min-h-svh bg-muted/40">
-        <header className="border-b bg-background"><div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-5 sm:px-8"><Link to="/" className="flex items-center gap-2 text-foreground no-underline"><span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground"><HugeiconsIcon icon={SparklesIcon} strokeWidth={2} className="size-4" /></span><span className="font-semibold">HSHV Pet Match</span></Link><span className="text-sm text-muted-foreground">Step {str(step + 1)} of 3</span></div></header>
+        <header className="border-b bg-background"><div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-5 sm:px-8"><Link to="/" className="flex items-center gap-2 text-foreground no-underline"><span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground"><HugeiconsIcon icon={SparklesIcon} strokeWidth={2} className="size-4" /></span><span className="font-semibold">HSHV Pet Match</span></Link><span className="text-sm font-medium text-muted-foreground">Step {str(step + 1)} of 3</span></div></header>
         <main className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-5 pb-16 pt-8 sm:px-8 sm:pt-12">
             <div className="flex flex-col gap-2"><Progress value={progress_value} /><div className="flex justify-between text-xs text-muted-foreground"><span>About 5 minutes</span><span>Answers save in this browser</span></div></div>
             <Card className="shadow-sm"><CardContent className="flex flex-col gap-7 p-5 sm:p-8">
@@ -91,6 +91,7 @@ def:pub PetQuestionnaire() -> JsxElement {
                         <Label htmlFor="species-either" className="flex cursor-pointer items-center gap-3 rounded-xl border bg-background p-4"><RadioGroupItem id="species-either" value="either" />Dogs or cats</Label>
                         <Label htmlFor="species-dog" className="flex cursor-pointer items-center gap-3 rounded-xl border bg-background p-4"><RadioGroupItem id="species-dog" value="dog" />Dogs only</Label>
                         <Label htmlFor="species-cat" className="flex cursor-pointer items-center gap-3 rounded-xl border bg-background p-4"><RadioGroupItem id="species-cat" value="cat" />Cats only</Label>
+                        <Label htmlFor="species-other" className="flex cursor-pointer items-center gap-3 rounded-xl border bg-background p-4"><RadioGroupItem id="species-other" value="other" />Other pets</Label>
                     </RadioGroup></fieldset>
                 }}
                 {if step == 1 {

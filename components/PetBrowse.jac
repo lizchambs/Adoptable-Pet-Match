@@ -1,4 +1,5 @@
 sv import from ..services.pets { Pet, list_pets, toggle_favorite }
+import from "@jac/runtime" { Link }
 import from .ui.card { Card, CardContent }
 import from .ui.button { Button }
 import from .ui.badge { Badge }
@@ -59,7 +60,7 @@ def:pub PetBrowse() -> JsxElement {
                     <span className="text-lg font-semibold tracking-tight">HSHV <span className="font-normal text-muted-foreground">Pet Match</span></span>
                 </a>
                 <span className="hidden text-sm text-muted-foreground sm:block">Humane Society of Huron Valley</span>
-                <Button variant="outline" size="sm" onClick={lambda { species = "all"; }}>Browse pets</Button>
+                <Link to="/questionnaire"><Button size="sm">Find my match</Button></Link>
             </div>
         </header>
         <main id="top" className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 pb-16 pt-8 sm:px-8 sm:pt-12">
@@ -82,7 +83,7 @@ def:pub PetBrowse() -> JsxElement {
                 <div className="flex flex-wrap items-end justify-between gap-3">
                     <div className="flex flex-col gap-1">
                         <h2 className="text-2xl font-semibold tracking-tight">Pets ready to meet you</h2>
-                        <p className="text-sm text-muted-foreground">A few wonderful friends looking for their people.</p>
+                        <p className="text-sm text-muted-foreground">A few wonderful friends looking for their people. Want help choosing? <Link to="/questionnaire" className="font-medium text-primary underline underline-offset-4">Take the matching questionnaire</Link>.</p>
                     </div>
                     <span className="text-sm text-muted-foreground">{str(len(visible))} companions</span>
                 </div>

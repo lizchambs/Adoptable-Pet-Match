@@ -20,6 +20,7 @@ def:pub PetResults() -> JsxElement {
             <Card className="border-primary/20 bg-primary/5 shadow-sm"><CardContent className="p-4 text-sm text-muted-foreground"><strong className="text-foreground">Mock listings:</strong> These sample profiles are not verified current HSHV listings. Confirm current availability and compatibility with HSHV.</CardContent></Card>
             {if loading { <Card><CardContent className="p-8 text-center">Loading your shortlist…</CardContent></Card> }}
             {if error { <Card><CardContent className="p-8 text-center text-destructive">Could not load matches. Return to the questionnaire and try again.</CardContent></Card> }}
+            {if len(matches) == 0 { <Card><CardContent className="flex flex-col items-start gap-3 p-8"><h2 className="text-xl font-semibold">No matching profiles in this mock dataset</h2><p className="text-sm text-muted-foreground">The current sample data contains only dogs and cats. HSHV listings may include other animals; check their current listings directly.</p><a href="https://www.hshv.org/adopt/" target="_blank" rel="noreferrer"><Button>Browse HSHV adoption information</Button></a></CardContent></Card> }}
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {for entry in matches {
                     <Card key={entry.pet_id} className="overflow-hidden shadow-sm">
