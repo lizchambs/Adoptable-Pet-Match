@@ -67,13 +67,13 @@ def:pub PetQuestionnaire() -> JsxElement {
         if step > 0 { step = step - 1; }
         else { navigate.call(None, "/"); }
     }
-    def select_species(e: ChangeEvent) { species = e.target.value; save_profile(); }
-    def select_home(e: ChangeEvent) { home = e.target.value; save_profile(); }
-    def select_tenure(e: ChangeEvent) { tenure = e.target.value; save_profile(); }
-    def select_yard(e: ChangeEvent) { yard = e.target.value; save_profile(); }
-    def select_activity(e: ChangeEvent) { activity = e.target.value; save_profile(); }
-    def select_experience(e: ChangeEvent) { experience = e.target.value; save_profile(); }
-    def select_hours(e: ChangeEvent) { hours = e.target.value; save_profile(); }
+    def select_species(value: str) { species = value; save_profile(); }
+    def select_home(value: str) { home = value; save_profile(); }
+    def select_tenure(value: str) { tenure = value; save_profile(); }
+    def select_yard(value: str) { yard = value; save_profile(); }
+    def select_activity(value: str) { activity = value; save_profile(); }
+    def select_experience(value: str) { experience = value; save_profile(); }
+    def select_hours(value: str) { hours = value; save_profile(); }
 
     progress_value = (step + 1) * 33;
     step_title = "Who are you hoping to meet?" if step == 0 else "Tell us about your home" if step == 1 else "What does your routine look like?";
