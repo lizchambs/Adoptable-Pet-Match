@@ -9,6 +9,20 @@ node Pet {
     has favorite: bool = False;
 }
 
+obj MatchCard {
+    has pet_id: str = "";
+    has name: str = "";
+    has species: str = "";
+    has age: str = "";
+    has sex: str = "";
+    has location: str = "";
+    has description: str = "";
+    has image_url: str = "";
+    has score: int = 0;
+    has reasons: list[str] = [];
+    has flags: list[str] = [];
+}
+
 def:pub list_pets() -> list[Pet] {
     pets = [root -->][?:Pet];
     if len(pets) == 0 {
@@ -29,4 +43,37 @@ def:pub toggle_favorite(pet_id: str) -> Pet | None {
         }
     }
     return None;
+}
+
+def:pub rank_pet_matches(species_preference: str, has_dogs: bool, has_cats: bool, has_children: bool, activity: str, first_pet: bool) -> list[MatchCard] {
+    pets = list_pets();
+    results: list[MatchCard] = [];
+    for pet in pets {
+        if species_preference != "either" and pet.species != species_preference { continue; }
+        reasons: list[str] = [];
+        flags: list[str] = ["Compatibility details are not available in this sample listing. Confirm household fit with HSHV staff."];
+        score = 58;
+        if pet.species == "dog" and activity == "active" {
+            score += 12;
+            reasons = reasons + ["A dog may suit your active routine."];
+        } elif pet.species == "cat" and activity == "calm" {
+            score += 12;
+            reasons = reasons + ["A cat may suit a calmer home routine."];
+        } else {
+            reasons = reasons + ["Species matches your selection."];
+        }
+        if first_pet {
+            reasons = reasons + ["You can ask HSHV staff about support for first-time adopters."];
+            flags = flags + ["Experience and training needs are not listed."];
+        } else {
+            reasons = reasons + ["Your pet experience may open more options."];
+        }
+        if has_dogs or has_cats or has_children {
+            flags = flags + ["Household compatibility is unknown; ask staff before arranging a visit."];
+        } else {
+            reasons = reasons + ["No existing pets or children were reported in your answers."];
+        }
+        results = results + [MatchCard(pet_id=jid(pet), name=pet.name, species=pet.species, age=pet.age, sex=pet.sex, location=pet.location, description=pet.description, image_url=pet.image_url, score=score, reasons=reasons, flags=flags)];
+    }
+    return results;
 }
