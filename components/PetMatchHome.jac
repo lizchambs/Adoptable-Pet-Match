@@ -17,7 +17,7 @@ def:pub PetMatchHome() -> JsxElement {
                 <div className="flex flex-col items-start gap-5">
                     <span className="rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1 text-sm">A more thoughtful way to meet</span>
                     <h1 className="max-w-2xl text-balance text-4xl font-semibold leading-tight tracking-tight sm:text-5xl lg:text-6xl">Find the pet who fits your life.</h1>
-                    <p className="max-w-xl text-base leading-relaxed text-primary-foreground/85 sm:text-lg">Share a little about your home and routine. Get a shortlist with clear reasons and honest questions to ask HSHV.</p>
+                    <p className="max-w-xl text-base leading-relaxed text-primary-foreground/85 sm:text-lg">Share a little about your home and routine. Get a shortlist of pets with your fit estimate.</p>
                     <div className="flex flex-wrap gap-3 pt-1">
                         <Link to="/questionnaire"><Button size="lg" variant="secondary" className="gap-2">Find my match <HugeiconsIcon icon={ArrowRight01Icon} strokeWidth={2} className="size-4" /></Button></Link>
                         <Link to="/pets"><Button size="lg" variant="outline" className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">Browse all listed pets</Button></Link>
